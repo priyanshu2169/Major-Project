@@ -3,7 +3,6 @@ body{
      display: flex;
      flex-direction: column;
      min-height: 100vh;
-     
 }
 
 .container{
@@ -14,17 +13,15 @@ body{
 .navbar{
     background-color: white;
     height: 150px;
-
 }
 
-.collapse{
-    display: flex !important;
-    flex-wrap: wrap;
+/* ✅ FIXED navbar collapse (DO NOT TOUCH) */
+@media (min-width: 768px) {
+    .navbar-collapse {
+        display: flex !important;
+        flex-wrap: wrap;
+    }
 }
-
-
-
-
 
 .nav-link{
     font-weight: 400 !important;
@@ -36,10 +33,7 @@ body{
     color: #fe424d !important;
     font-size: 1.5rem !important;
     margin-top: -90px;
-
 }
-
-
 
 /* footer */
 .footer_link a{
@@ -54,18 +48,16 @@ body{
     text-align: center;
     background-color: aquamarine;
     height: 130px;
-    
 }
 
 .footer_socialMedia{
     font-size: 1.5rem;
-    
 }
 
 .fa-brands{
     margin-right: 10px;
-    
 }
+
 .foot{
     margin-bottom: 10px;
 }
@@ -102,23 +94,20 @@ body{
     background-color: white;
 }
 
-
 /* show page */
 .show-img{
     height: 30vh;
 }
 
-
 .col{
     display: flex;
     justify-content: center;
     margin-left: 8rem;
-    
 }
+
 .btn{
     margin-right: 2rem;
 }
-
 
 /* map */
 #map{
@@ -127,35 +116,33 @@ body{
     border-radius: 10px;
 }
 
-/*navbar */
+/* navbar icons */
 .fa-house,.fa-hotjar,.fa-bell-concierge{
     font-size:1.5rem;
 }
 
+/* ================= SEARCH BAR (FIXED) ================= */
 
-
-
-/* search */
 .search-box {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;              /* ✅ important */
+    width: 100%;                  /* ✅ important */
+    max-width: 900px;
+    margin: 10px auto;
     background: white;
     border-radius: 50px;
     padding: 10px 15px;
-    width: fit-content;
-    margin-top: 10px;
-
-    /* 🔥 Airbnb shadow */
     box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-
     border: 1px solid #ddd;
 }
 
-/* each section */
 .search-item {
     display: flex;
     flex-direction: column;
     padding: 0 15px;
+    flex: 1 1 150px;              /* ✅ responsive */
+    min-width: 120px;
 }
 
 .search-item label {
@@ -169,16 +156,14 @@ body{
     font-size: 0.9rem;
 }
 
-/* divider line */
 .divider {
     width: 1px;
     height: 30px;
     background-color: #ddd;
 }
 
-/* button */
 .search-btn {
-    background-color: #ff385c;   /* Airbnb red */
+    background-color: #ff385c;
     color: white;
     border: none;
     border-radius: 50%;
@@ -187,25 +172,25 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;              /* ✅ prevents shrink */
 }
 
-/* hover effect */
 .search-box:hover {
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
     transition: 0.3s;
 }
 
-/* taxes and toggle switches */
+/* taxes */
 .taxes{
     display: none;
-   
 }
 
+/* google translate */
 #google_translate_element{
-    width: 2px;
+    margin-left: 80px;
 }
 
-/* Select dropdown styling */
+/* select */
 select {
     padding: 8px 12px;
     border: 1px solid #ddd;
@@ -241,219 +226,56 @@ select:focus {
 
 option {
     padding: 8px 12px;
-    background-color: white;
-    color: #222222;
-    font-family: "Plus Jakarta Sans", sans-serif;
 }
 
-option:hover {
-    background-color: #f5f5f5;
-}
+/* ================= RESPONSIVE ================= */
 
-#google_translate_element{
-    margin-left: 80px;
-}
-
-/* ========== MEDIA QUERIES FOR RESPONSIVE DESIGN ========== */
-
-/* Large devices (desktops, 992px and up) */
-@media (max-width: 991px) {
-    .navbar {
-        height: auto;
-        padding: 1rem 0;
-    }
-
-    .navbar-brand {
-        margin-top: 0 !important;
-        font-size: 1.3rem !important;
-    }
-
-    .nav-link {
-        margin-top: 0 !important;
-        padding: 0.5rem 0.5rem !important;
-        font-size: 0.9rem;
-    }
-
-    .search-box {
-        width: 100%;
-        border-radius: 20px;
-        flex-wrap: wrap;
-        margin-top: 10px;
-    }
-
-    .divider {
-        display: none;
-    }
-
-    .search-item {
-        flex: 1;
-        min-width: 100px;
-        padding: 8px 10px;
-    }
-
-    select {
-        width: 100%;
-        margin-right: 0;
-    }
-
-    #google_translate_element {
-        margin-left: 0;
-        margin-top: 10px;
-    }
-
-    .navbar-nav.ms-auto {
-        flex-direction: column;
-        margin-top: 10px;
-    }
-}
-
-/* Tablets (768px and down) */
+/* Tablets */
 @media (max-width: 768px) {
-    body {
-        font-size: 14px;
-    }
-
-    .navbar {
-        height: auto;
-    }
-
-    .navbar-brand {
-        font-size: 1.2rem !important;
-    }
-
-    .nav-link {
-        font-size: 0.85rem;
-        padding: 0.4rem !important;
-    }
-
-    .fa-house, .fa-hotjar, .fa-bell-concierge {
-        font-size: 1.2rem;
-    }
 
     .search-box {
         flex-direction: column;
-        border-radius: 15px;
-        padding: 12px 10px;
         width: 100%;
+        border-radius: 15px;
     }
 
     .search-item {
         width: 100%;
-        padding: 8px 0;
         border-bottom: 1px solid #eee;
+        padding: 8px 0;
     }
 
     .search-item:last-child {
         border-bottom: none;
     }
 
-    .search-item label {
-        font-size: 0.65rem;
-    }
-
-    .search-item input {
-        font-size: 0.85rem;
-    }
-
     .search-btn {
         width: 100%;
-        margin: 10px 0 0 0;
-        border-radius: 50%;
-        padding: 10px;
+        margin-top: 10px;
+        border-radius: 30px;
     }
 
-    select {
+    #map {
         width: 100%;
-        padding: 10px 8px;
-        margin-bottom: 8px;
-        margin-right: 0;
-        font-size: 0.85rem;
-    }
-
-    /* Show page */
-    .show-img {
-        height: 25vh;
     }
 
     .col {
         margin-left: 0;
-        display: flex;
         flex-direction: column;
         align-items: center;
     }
 
     .btn {
-        margin-right: 0;
+        width: 100%;
         margin-bottom: 10px;
-        width: 100%;
-    }
-
-    /* Map */
-    #map {
-        height: 300px;
-        width: 100%;
-    }
-
-    .footer {
-        height: auto;
-        padding: 1.5rem 0;
-    }
-
-    .footer_socialMedia {
-        font-size: 1.2rem;
-        margin-top: 10px;
-    }
-
-    .fa-brands {
-        margin-right: 8px;
-    }
-
-    .card-img-top {
-        border-radius: 0.8rem !important;
     }
 }
 
-/* Mobile phones (480px and down) */
+/* Mobile */
 @media (max-width: 480px) {
-    body {
-        font-size: 13px;
-    }
-
-    .navbar {
-        height: auto;
-        padding: 0.75rem 0;
-    }
-
-    .navbar-brand {
-        font-size: 1rem !important;
-        margin: 0 !important;
-    }
-
-    .nav-link {
-        font-size: 0.75rem;
-        padding: 0.3rem 0.3rem !important;
-    }
-
-    .fa-house, .fa-hotjar, .fa-bell-concierge {
-        font-size: 1rem;
-    }
-
-    .container {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
 
     .search-box {
-        padding: 10px 8px;
-        margin-top: 8px;
-    }
-
-    .search-item {
-        padding: 6px 0;
-    }
-
-    .search-item label {
-        font-size: 0.6rem;
+        padding: 10px;
     }
 
     .search-item input {
@@ -461,87 +283,14 @@ option:hover {
     }
 
     select {
-        padding: 8px 6px;
-        font-size: 0.8rem;
         width: 100%;
     }
 
     .navbar-nav.ms-auto {
-        gap: 5px;
-    }
-
-    .show-img {
-        height: 20vh;
-    }
-
-    .col {
-        margin-left: 0;
-        padding: 0 10px;
-    }
-
-    .btn {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.75rem;
-        margin-bottom: 8px;
-        width: 100%;
+        flex-direction: column;
     }
 
     #map {
         height: 250px;
-        width: 100%;
-    }
-
-    .listing-card {
-        margin-bottom: 1.5rem !important;
-    }
-
-    .card-text p {
-        font-size: 0.85rem;
-    }
-
-    .footer {
-        padding: 1rem 0;
-    }
-
-    .footer_socialMedia {
-        font-size: 1rem;
-    }
-
-    .fa-brands {
-        margin-right: 5px;
-    }
-
-    .foot {
-        margin-bottom: 5px;
-        font-size: 0.85rem;
     }
 }
-
-/* Extra small phones (360px and down) */
-@media (max-width: 360px) {
-    .navbar-brand {
-        font-size: 0.9rem !important;
-    }
-
-    .nav-link {
-        font-size: 0.7rem;
-    }
-
-    .search-item label {
-        font-size: 0.55rem;
-    }
-
-    .btn {
-        padding: 0.3rem 0.6rem;
-        font-size: 0.7rem;
-    }
-}
-
-
-
-
-
-
-
-
-
