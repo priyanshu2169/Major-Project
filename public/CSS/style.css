@@ -253,6 +253,289 @@ option:hover {
     margin-left: 80px;
 }
 
+/* ========== MEDIA QUERIES FOR RESPONSIVE DESIGN ========== */
+
+/* Large devices (desktops, 992px and up) */
+@media (max-width: 991px) {
+    .navbar {
+        height: auto;
+        padding: 1rem 0;
+    }
+
+    .navbar-brand {
+        margin-top: 0 !important;
+        font-size: 1.3rem !important;
+    }
+
+    .nav-link {
+        margin-top: 0 !important;
+        padding: 0.5rem 0.5rem !important;
+        font-size: 0.9rem;
+    }
+
+    .search-box {
+        width: 100%;
+        border-radius: 20px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+    }
+
+    .divider {
+        display: none;
+    }
+
+    .search-item {
+        flex: 1;
+        min-width: 100px;
+        padding: 8px 10px;
+    }
+
+    select {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    #google_translate_element {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .navbar-nav.ms-auto {
+        flex-direction: column;
+        margin-top: 10px;
+    }
+}
+
+/* Tablets (768px and down) */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .navbar {
+        height: auto;
+    }
+
+    .navbar-brand {
+        font-size: 1.2rem !important;
+    }
+
+    .nav-link {
+        font-size: 0.85rem;
+        padding: 0.4rem !important;
+    }
+
+    .fa-house, .fa-hotjar, .fa-bell-concierge {
+        font-size: 1.2rem;
+    }
+
+    .search-box {
+        flex-direction: column;
+        border-radius: 15px;
+        padding: 12px 10px;
+        width: 100%;
+    }
+
+    .search-item {
+        width: 100%;
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .search-item:last-child {
+        border-bottom: none;
+    }
+
+    .search-item label {
+        font-size: 0.65rem;
+    }
+
+    .search-item input {
+        font-size: 0.85rem;
+    }
+
+    .search-btn {
+        width: 100%;
+        margin: 10px 0 0 0;
+        border-radius: 50%;
+        padding: 10px;
+    }
+
+    select {
+        width: 100%;
+        padding: 10px 8px;
+        margin-bottom: 8px;
+        margin-right: 0;
+        font-size: 0.85rem;
+    }
+
+    /* Show page */
+    .show-img {
+        height: 25vh;
+    }
+
+    .col {
+        margin-left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+    /* Map */
+    #map {
+        height: 300px;
+        width: 100%;
+    }
+
+    .footer {
+        height: auto;
+        padding: 1.5rem 0;
+    }
+
+    .footer_socialMedia {
+        font-size: 1.2rem;
+        margin-top: 10px;
+    }
+
+    .fa-brands {
+        margin-right: 8px;
+    }
+
+    .card-img-top {
+        border-radius: 0.8rem !important;
+    }
+}
+
+/* Mobile phones (480px and down) */
+@media (max-width: 480px) {
+    body {
+        font-size: 13px;
+    }
+
+    .navbar {
+        height: auto;
+        padding: 0.75rem 0;
+    }
+
+    .navbar-brand {
+        font-size: 1rem !important;
+        margin: 0 !important;
+    }
+
+    .nav-link {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.3rem !important;
+    }
+
+    .fa-house, .fa-hotjar, .fa-bell-concierge {
+        font-size: 1rem;
+    }
+
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .search-box {
+        padding: 10px 8px;
+        margin-top: 8px;
+    }
+
+    .search-item {
+        padding: 6px 0;
+    }
+
+    .search-item label {
+        font-size: 0.6rem;
+    }
+
+    .search-item input {
+        font-size: 0.8rem;
+    }
+
+    select {
+        padding: 8px 6px;
+        font-size: 0.8rem;
+        width: 100%;
+    }
+
+    .navbar-nav.ms-auto {
+        gap: 5px;
+    }
+
+    .show-img {
+        height: 20vh;
+    }
+
+    .col {
+        margin-left: 0;
+        padding: 0 10px;
+    }
+
+    .btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+        margin-bottom: 8px;
+        width: 100%;
+    }
+
+    #map {
+        height: 250px;
+        width: 100%;
+    }
+
+    .listing-card {
+        margin-bottom: 1.5rem !important;
+    }
+
+    .card-text p {
+        font-size: 0.85rem;
+    }
+
+    .footer {
+        padding: 1rem 0;
+    }
+
+    .footer_socialMedia {
+        font-size: 1rem;
+    }
+
+    .fa-brands {
+        margin-right: 5px;
+    }
+
+    .foot {
+        margin-bottom: 5px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Extra small phones (360px and down) */
+@media (max-width: 360px) {
+    .navbar-brand {
+        font-size: 0.9rem !important;
+    }
+
+    .nav-link {
+        font-size: 0.7rem;
+    }
+
+    .search-item label {
+        font-size: 0.55rem;
+    }
+
+    .btn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+    }
+}
+
 
 
 
