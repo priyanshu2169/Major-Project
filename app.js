@@ -1,11 +1,27 @@
-//Requirements
+if(process.env.NODE_ENV!="production"){
+    require("dotenv").config();
+}
 
+
+
+
+//Requirements
 let express=require("express");
 let mongoose=require("mongoose");
-let Listing=require("./Models/model1.js");
 let path=require("path");
 let methodOverride=require("method-override");
 let ejsMate=require("ejs-mate");
+let ExpressError=require("./utils/ExpressError.js");
+let session=require("express-session");
+let flash=require("connect-flash");
+let passport=require("passport");
+let LocalStrategy=require("passport-local");
+let User=require("./Models/user.js");
+
+
+let listingRouter=require("./routes/listing.js");
+let reviewRouter=require("./routes/review.js");
+let userRouter=require("./routes/user.js");
 
 
 
@@ -21,11 +37,10 @@ app.listen(8080,()=>{
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"/views"));
 app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"public")));
-
-
 
 
 
@@ -41,76 +56,71 @@ async function main() {
 }
 
 
+const sessionOptions={
+    secret:"supersecretcode",
+    resave:false,
+    saveUninitialized:true,
+    cookie:{
+        expires:Date.now()+7*24*60*60*1000,
+        maxAge:7*24*60*60*1000,
+        httpOnly:true,
+    },
+};
 
-// index route/home page
-app.get("/listings",async (req,res)=>{
-    let alllistings=await Listing.find();
-    res.render("listings/index.ejs",{alllistings});
+app.use(session(sessionOptions));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser()); //for saving info. in session
+passport.deserializeUser(User.deserializeUser()); //for removing info. from session when session is over
+
+app.use((req,res,next)=>{
+    res.locals.successMsg=req.flash("success");
+    res.locals.errorMsg=req.flash("error");
+    res.locals.currentUser=req.user;
+    next();
 });
 
 
-//new route
-app.get("/listings/new",async (req,res)=>{
-    res.render("listings/new.ejs");
-})
-
-//show route
-app.get("/listings/:id",async (req,res)=>{
-    let {id}=req.params;
-    let listings=await Listing.findById(id);
-    res.render("listings/show.ejs",{listings});
-    
-})
-
-
-//create route
-app.post("/listings",async (req,res)=>{
-    let NewListing= new Listing(req.body.listing);
-    await NewListing.save();
-    res.redirect("/listings");
-});
-
-//edit route
-app.get("/listings/:id/edit",async (req,res)=>{
-    let {id}=req.params;
-    let listings=await Listing.findById(id);
-    res.render("listings/edit.ejs",{listings});
-});
-
-//update route
-app.put("/listings/:id",async (req,res)=>{
-    let {id}=req.params;
-    await Listing.findByIdAndUpdate(id,{...req.body.listing});
-    res.redirect(`/listings/${id}`);
-});
-
-
-//delete route
-app.delete("/listings/:id",async (req,res)=>{
-     let {id}=req.params;
-   await Listing.findByIdAndDelete(id);
-   res.redirect("/listings");
-})
-
-
-
-//sample
-// app.get("/testSample",async (req,res)=>{
-//     Listing.deleteMany();
-//     let sampleListing=new Listing({
-//     title:"vila",
-//     description:"it is beautifula vilala",
-//     price:2000,
-//     location:"Meerut",
-//     country:"India",
-// });
-// await sampleListing.save();
-// console.log("sample saved succesfully");
-// res.send("successful testing");
+// app.get("/demoUser",async (req,res)=>{
+//     let fakeUser=new User({
+//         email:"priyanshu@gmail.com",
+//         username:"priyanshu-student",
+//     });
+//     let registeredUser=await User.register(fakeUser,"helloworld");
+//     res.send(registeredUser);
 // });
 
 
 //root page
 app.get("/",(req,res)=>{
     res.send("root page");
+});
+
+
+
+//listings
+app.use("/listings",listingRouter);
+
+//reviews
+app.use("/listings/:id/reviews",reviewRouter);
+
+//users
+app.use("/",userRouter);
+
+
+
+
+app.use((req,res,next)=>{
+    next(new ExpressError(404,"Page Not Found!"));
+});
+
+
+//error handling middleware
+app.use((err,req,res,next)=>{
+    let {statusCode=500,message="Something went wrong!"}=err;
+    res.status(statusCode).render("listings/error.ejs",{message});
 })
